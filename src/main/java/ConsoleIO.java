@@ -3,15 +3,15 @@ import java.util.Scanner;
 
 public class ConsoleIO {
 
-    private static final int LEN_LIMIT = 300;
+    private final int LEN_LIMIT = 300;
 
-    private static final Scanner scan = new Scanner(System.in);
+    private final Scanner scan = new Scanner(System.in);
 
-    public static void outText(String text) {
+    public void outText(String text) {
         System.out.print("\n" + text);
     }
 
-    public static int readInt(String promt) {
+    public int readInt(String promt) {
         while (true) {
             outText(promt);
             try {
@@ -25,7 +25,7 @@ public class ConsoleIO {
         }
     }
 
-    public static String readReqest(String promt) {
+    public String readReqest(String promt) {
         while (true) {
             outText(promt);
             if (!scan.hasNextLine()) {
@@ -43,7 +43,7 @@ public class ConsoleIO {
         }
     }
 
-    public static <T> T browse(List<T> list) {
+    public <T> T browse(List<T> list) {
         int page = 0;
         while (true) {
             for (int i = 1; i <= 5; i++) {
