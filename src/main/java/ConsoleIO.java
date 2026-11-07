@@ -4,7 +4,6 @@ import java.util.Scanner;
 public class Input {
 
     private static final int LEN_LIMIT = 300;
-    private static final int SIZE_PAGE = 5;
 
     private static final Scanner scan = new Scanner(System.in);
 
@@ -26,10 +25,10 @@ public class Input {
     public static String readReqest(String promt) {
         while (true) {
             outText(promt);
+            String str = scan.nextLine().trim();
             if (!scan.hasNextLine()) {
                 throw new InputClosedException("Вы закрыли поток.");
             }
-            String str = scan.nextLine().trim();
             int len = str.length();
             if (len <= LEN_LIMIT && !str.isEmpty()) {
                 return str;
@@ -44,21 +43,21 @@ public class Input {
     public static <T> T browse(List<T> list) {
         int page = 0;
         while (true) {
-            for (int i = 1; i <= SIZE_PAGE; i++) {
-                if (SIZE_PAGE * page + i - 1 > list.size() - 1) {
+            for (int i = 1; i <= 5; i++) {
+                if (5 * page + i - 1 > list.size() - 1) {
                     break;
                 }
-                outText(i + ") " + list.get(SIZE_PAGE * page + i - 1));
+                outText(i + ") " + list.get(5 * page + i - 1));
             }
             outText("6)Предыдущая страница\n7)Следующая страница");
             int r = readInt("Ввод: ");
             switch (r) {
                 case 1, 2, 3, 4, 5:
-                    if (SIZE_PAGE * page + r - 1 > list.size() - 1) {
+                    if (5 * page + r - 1 > list.size() - 1) {
                         outText("Некорректное значение, повторите ввод");
                         continue;
                     }
-                    return list.get(SIZE_PAGE * page + r - 1);
+                    return list.get(5 * page + r - 1);
                 case 6:
                     if (page == 0) {
                         outText(
@@ -69,7 +68,7 @@ public class Input {
                     page--;
                     break;
                 case 7:
-                    if ((list.size() + 4) / SIZE_PAGE == page + 1) {
+                    if ((list.size() + 4) / 5 == page + 1) {
                         outText(
                             "Это последняя страница, следующей не существует"
                         );
