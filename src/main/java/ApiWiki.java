@@ -9,8 +9,6 @@ import java.time.Duration;
 
 public class ApiWiki {
 
-    ConsoleIO cio = new ConsoleIO();
-
     HttpClient client = HttpClient.newBuilder()
         .connectTimeout(Duration.ofSeconds(10))
         .build();

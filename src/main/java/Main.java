@@ -1,22 +1,32 @@
 import java.io.IOException;
+import java.util.List;
 
 public class Main {
 
     public static void main(String[] args) {
         ConsoleIO cio = new ConsoleIO();
         ApiWiki api = new ApiWiki();
-        try {
-            while (true) {
+        AnswerAnalysis answ = new AnswerAnalysis();
+        while (true) {
+            try {
+                ParseResult result = null;
                 String request = cio.readReqest("Введите запрос: ");
-                String response = api.workApi(request);
+                String json = api.workApi(request);
+                List<ParseResult> response = answ.parse(json);
+                if (response.isEmpty()) {
+                    cio.outText("Ничего не найдено.");
+                    continue;
+                } else if (response.size() == 1) {
+                    result = response.get(0);
+                } else {
+                    result = cio.browse(response);
+                }
+            } catch (InputClosedException e) {
+                cio.outText("Поток ввода: " + e.getMessage());
+                return;
+            } catch (IOException | ApiException e) {
+                cio.outText("Ошибка поиска: " + e.getMessage());
             }
-        } catch (InputClosedException e) {
-            cio.outText("Поток ввода: " + e.getMessage());
-            return;
-        } catch (IOException e) {
-            cio.outText(e.getMessage());
-        } catch (ApiException e) {
-            cio.outText(e.getMessage());
         }
     }
 }
