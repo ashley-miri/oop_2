@@ -3,8 +3,6 @@ import java.util.Scanner;
 
 public class ConsoleIO {
 
-    private final int LEN_LIMIT = 300;
-
     private final Scanner scan = new Scanner(System.in);
 
     public void outText(String text) {
@@ -33,10 +31,10 @@ public class ConsoleIO {
             }
             String str = scan.nextLine().trim();
             int len = str.length();
-            if (len <= LEN_LIMIT && !str.isEmpty()) {
+            if (len <= Constants.LEN_LIMIT && !str.isEmpty()) {
                 return str;
-            } else if (len > LEN_LIMIT) {
-                outText("Строка превышает лимит " + LEN_LIMIT + ".");
+            } else if (len > Constants.LEN_LIMIT) {
+                outText("Строка превышает лимит " + Constants.LEN_LIMIT + ".");
             } else {
                 outText("Строка пуста.");
             }

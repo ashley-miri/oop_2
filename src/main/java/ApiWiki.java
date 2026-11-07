@@ -13,7 +13,7 @@ public class ApiWiki {
         .connectTimeout(Duration.ofSeconds(10))
         .build();
 
-    private final String CONST_URL =
+    private static final String CONST_URL =
         "https://ru.wikipedia.org/w/api.php?action=query&list=search&utf8=&format=json&srsearch=";
 
     public String workApi(String req) throws IOException {

@@ -30,9 +30,6 @@ public class AnswerAnalysis {
         ) {
             throw new ApiException("Некорректный ответ сервера.");
         }
-        if (response.query.search == null) {
-            throw new ApiException("По данному запросу ничего не найдено.");
-        }
         return response.query.search;
     }
 }

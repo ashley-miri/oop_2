@@ -7,6 +7,7 @@ public class Main {
         ConsoleIO cio = new ConsoleIO();
         ApiWiki api = new ApiWiki();
         AnswerAnalysis answ = new AnswerAnalysis();
+        BrowserOpener bro = new BrowserOpener();
         while (true) {
             try {
                 ParseResult result = null;
@@ -20,6 +21,13 @@ public class Main {
                     result = response.get(0);
                 } else {
                     result = cio.browse(response);
+                }
+                if (!bro.openBrowser(result.getPageid())) {
+                    cio.outText(
+                        "Не удалось открыть браузер, вот ссылка " +
+                            Constants.CONST_URL_2 +
+                            result.getPageid()
+                    );
                 }
             } catch (InputClosedException e) {
                 cio.outText("Поток ввода: " + e.getMessage());
