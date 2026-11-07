@@ -13,11 +13,10 @@ public class ApiWiki {
         .connectTimeout(Duration.ofSeconds(10))
         .build();
 
-    private static final String CONST_URL =
-        "https://ru.wikipedia.org/w/api.php?action=query&list=search&utf8=&format=json&srsearch=";
-
     public String workApi(String req) throws IOException {
-        String url = CONST_URL + URLEncoder.encode(req, StandardCharsets.UTF_8);
+        String url =
+            Constants.CONST_URL_1 +
+            URLEncoder.encode(req, StandardCharsets.UTF_8);
         HttpRequest request = HttpRequest.newBuilder()
             .uri(URI.create(url))
             .header("User-Agent", "WikiSearchLab/1.0 (student project)")
