@@ -1,7 +1,7 @@
 import java.util.List;
 import java.util.Scanner;
 
-public class Input {
+public class ConsoleIO {
 
     private static final int LEN_LIMIT = 300;
 
@@ -15,6 +15,9 @@ public class Input {
         while (true) {
             outText(promt);
             try {
+                if (!scan.hasNextLine()) {
+                    throw new InputClosedException("Вы закрыли поток.");
+                }
                 return Integer.parseInt(scan.nextLine().trim());
             } catch (NumberFormatException e) {
                 outText("Введи значение принадлежащее множеству Z");
@@ -25,10 +28,10 @@ public class Input {
     public static String readReqest(String promt) {
         while (true) {
             outText(promt);
-            String str = scan.nextLine().trim();
             if (!scan.hasNextLine()) {
                 throw new InputClosedException("Вы закрыли поток.");
             }
+            String str = scan.nextLine().trim();
             int len = str.length();
             if (len <= LEN_LIMIT && !str.isEmpty()) {
                 return str;

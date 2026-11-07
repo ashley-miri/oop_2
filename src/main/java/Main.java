@@ -3,10 +3,10 @@ public class Main {
     public static void main(String[] args) {
         try {
             while (true) {
-                String reqest = Input.readReqest("Введите запрос: ");
+                String reqest = ConsoleIO.readReqest("Введите запрос: ");
             }
         } catch (InputClosedException e) {
-            Input.outText("Поток ввода: " + e.getMessage());
+            ConsoleIO.outText("Поток ввода: " + e.getMessage());
         }
     }
 }
